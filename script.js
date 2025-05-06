@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             password: password
         };
 
-        // Envío de datos al servidor Node.js (save_data.js)
+        // Envío de datos al servidor Node.js
         //fetch('http://localhost:3000/', {
         fetch('https://optimizacion-9lbf.onrender.com/', {
             method: 'POST',
