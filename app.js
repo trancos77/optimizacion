@@ -19,8 +19,10 @@ app.post('/', (req, res) => {
     const fs = require('fs').promises;
 
     async function saveData() {
+        console.log('dentro de saveData');
         try {
             const filePath = path.join(__dirname, filename);
+            console.log(filePath);
             let existingData = [];
             try {
                 const fileContent = await fs.readFile(filePath, 'utf8');
