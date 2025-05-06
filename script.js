@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Envío de datos al servidor Node.js (save_data.js)
-        fetch('http://localhost:3000/', { // URL debe coincidir con donde se ejecuta save_data.js
+        //fetch('http://localhost:3000/', {
+        fetch('https://optimizacion-9lbf.onrender.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
