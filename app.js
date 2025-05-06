@@ -8,8 +8,41 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Servir archivos estáticos desde el directorio actual
+app.use(express.static(path.join(__dirname)));
+app.use(express.json()); // Para analizar el cuerpo de las peticiones JSON
+
+
+app.post('/', (req, res) => {
+    const userData = req.body;
+    const filename = 'users.json';
+    const fs = require('fs').promises;
+
+    async function saveData() {
+        try {
+            const filePath = path.join(__dirname, filename);
+            let existingData = [];
+            try {
+                const fileContent = await fs.readFile(filePath, 'utf8');
+                existingData = JSON.parse(fileContent);
+            } catch (error) {
+                if (error.code !== 'ENOENT') {
+                    console.error('Error reading file:', error);
+                    return res.status(500).send('Error al leer el archivo.');
+                }
+            }
+            existingData.push(userData);
+            await fs.writeFile(filePath, JSON.stringify(existingData, null, 2), 'utf8');
+            res.send('Datos guardados correctamente.');
+        } catch (error) {
+            console.error('Error saving data:', error);
+            res.status(500).send('Error al guardar los datos.');
+        }
+    }
+
+    saveData();
+});
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
-
-//esto aparecerá solo en rama develop
