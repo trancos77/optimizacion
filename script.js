@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Envío de datos al servidor Node.js
-        //fetch('http://localhost:3000/', {
-        fetch('https://optimizacion-9lbf.onrender.com/', {
+        fetch('http://localhost:3000/', {
+        //fetch('https://optimizacion-9lbf.onrender.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

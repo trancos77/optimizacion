@@ -35,7 +35,8 @@ app.post('/', (req, res) => {
             }
             existingData.push(userData);
             await fs.writeFile(filePath, JSON.stringify(existingData, null, 2), 'utf8');
-            res.send('Datos guardados correctamente.');
+            //res.send('Datos guardados correctamente.');
+            res.json(userData)
         } catch (error) {
             console.error('Error saving data:', error);
             res.status(500).send('Error al guardar los datos.');
@@ -43,6 +44,11 @@ app.post('/', (req, res) => {
     }
 
     saveData();
+});
+
+// Middleware para manejar errores "Cannot GET" para rutas no definidas
+app.use((req, res, next) => {
+    res.redirect('/'); // Redirige a la página principal
 });
 
 app.listen(PORT, () => {
